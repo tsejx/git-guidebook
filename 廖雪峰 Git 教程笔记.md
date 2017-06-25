@@ -1,6 +1,8 @@
 ﻿
 # 廖雪峰 Git 教程 笔记整理
 
+标签 ：Git
+
 **前言**
 
  - 本笔记主要记录教程中所有的命令，概念内容不包括在内
@@ -8,15 +10,19 @@
 
 **创建版本库**
 
-     git init # 初始化所在目录为Git仓库
+```
+    git init # 初始化所在目录为Git仓库
+```
 
 > 注意：初始化的目录可以不为空
 
 **添加文件到版本库**
 
+```
     git add <file> ... # 添加文件到暂存区（stage）
     git add -f <file> ... # 强制添加到暂存区（可用于添加忽略文件）
     git commit -m "description"
+```
 
 > git add 命令可以多次执行，然后commit一次。
 
@@ -76,20 +82,21 @@
  - 创建SSH Key
 
 ```
-ssh-keygen -t rsa -C "youremail@example.com"#生成的Key在家目录.ssh文件夹里面，pub后缀是公钥，另一个是私钥。
+    ssh-keygen -t rsa -C "youremail@example.com"#生成的Key在家目录.ssh文件夹里面，pub后缀是公钥，另一个是私钥。
 ```
 
  - 添加远程库
 ```
- git remote add origin git@server-name:path/repo-name.git  #添加远程仓库
-git remote  #查看远程库信息
-           -v  #显示详细信息
-git push -u origin <branch>  #推送并关联指定分支到远程库
+    git remote add origin git@server-name:path/repo-name.git  #添加远程仓库
+    git remote  #查看远程库信息
+            -v  #显示详细信息
+    git push -u origin <branch>  #推送并关联指定分支到远程库
 ```
 
 > 除第一次关联，之后push不用加-u选项
 
  - 从远程库克隆
+
 ```
     git clone git@server-name:path/repo-name.git  #将远程仓库克隆到当前目录
     git pull  #拉取远程仓库内容
@@ -97,6 +104,7 @@ git push -u origin <branch>  #推送并关联指定分支到远程库
 
 **分支管理**
 
+```
     git branch <branch>  #创建分支
     git checkout <branch>  #切换到指定分支
     git checkout -b <branch>  #创建并切换到该分支
@@ -112,7 +120,8 @@ git push -u origin <branch>  #推送并关联指定分支到远程库
     git stash pop [stash@{X}]  #恢复工作状态，并删除stash内容
     git stash drop [stash@{X}]  #删除stash内容
     git branch -D <branch> #强制删除分支（常用于未合并的分支）
-    
+```
+
 > HEAD不是直接指向提交点，而是指向分支，分支再指向提交点
 
 - 多人协作
@@ -129,6 +138,7 @@ git push -u origin <branch>  #推送并关联指定分支到远程库
 
 **标签管理**
 
+```
     git tag  #查看现有标签
     git tag <tag_name>  #给当前所在的commit打标签
     git tag <tag_name> <commit_id>  #给指定commit打标签
@@ -139,19 +149,23 @@ git push -u origin <branch>  #推送并关联指定分支到远程库
     git push origin <tag_name>  #推送标签到远程库
     git push origin --tags  #推送所有未推送的标签到远程库
     git push origin :refs/tags/<tag_name>  #删除远程标签（先删除本地，再使用该命令删除）
+```
 
 **自定义Git**
 
+```
     git config --global user.name "you_name"  #设置全局用户名
     git config --global user.email "email@example.com"  #设置全局邮箱
     git config --global color.ui true  #设置全局颜色显示
     git config --global alias.<alias_name> <'command_name'>  #设置别名
+```
 
 - 忽略特殊文件
 
 i.工作区创建`.gitignore`文件
 ii.内容举例，如下：
 
+```
     #Windows:
     Thumbs.db
     ehthumbs.db
@@ -167,8 +181,9 @@ ii.内容举例，如下：
     #My configurations:
     db.ini
     deploy_key_rsa
+```
 
-> git check-ignore -v <file>  #查看忽略该文件的规则
+    git check-ignore -v <file>  #查看忽略该文件的规则
 
 > 规则有错时常用上述命令查找定位
 
