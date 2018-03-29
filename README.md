@@ -1,5 +1,11 @@
 # Git GuideBook
 
+## :speech_balloon:概要
+
+Git-GuideBook 致力于汇集整理日常工作中比较常用 Git 版本管理命令，顾未能完全覆盖 Git 所有命令，若您需要查询更详细的 Git 命令信息，请查阅官方完整文档 [Git Reference ](https://git-scm.com/docs) 。
+
+## :bookmark:项目目录
+
 - 设置和配置
   - git
   - 配置 `config`
