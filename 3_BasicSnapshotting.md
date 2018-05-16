@@ -256,11 +256,114 @@ $ git commit -m 'the commit messge'
 $ git commit -amend
 ```
 
-## 重启 `reset`
+## 回滚 `reset`
+
+> Reset current HEAD to the specified state
+>
+> 用于将当前 `HEAD` 复位到指定状态（一般用于撤消之前的一些操作）
+
+### 语法
+
+```
+git reset [-q] [<tree-ish>] [--] <paths>…
+git reset (--patch | -p) [<tree-ish>] [--] [<paths>…]
+git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [<commit>]
+```
+
+### 说明
 
 
 
 
+
+### 用法
+
+#### 回滚添加操作
+
+```
+$ edit    file1.c file2.c           		# (1) 
+$ git add file1.c file1.c           		# (1.1) 添加两个文件到暂存
+$ mailx                             		# (2) 
+$ git reset                           		# (3) 
+$ git pull git://info.example.com/ nitfol   # (4)
+```
+
+1. 编辑文件 `file1.js ` 和 `file2.js` ，做了些更改，并把更改添加到暂存区
+2. 此时有人修改文件，并需要您执行 `git pull` ，有一些改变需要合并下来。
+3. 然而，您已经把暂存区搞乱了，因为暂存区同 HEAD commit 不匹配了，但是即将 `git pull` 下来的东西不会影响已经修改的 `file1.js` 和 `file2.js`，因此可以 `revert` 这两个文件的改变。在 `还原 revert` 之后，那些改变应该依旧在工作目录中，因此执行 `git reset`。
+4. 然后，执行了 `git pull` 之后，自动合并，`file1.js` 和 `file2.js` 这些改变依然在工作目录中。
+
+#### 回滚最近一次提交
+
+```
+$ git commit -a -m "这是提交的备注信息"
+$ git reset --soft HEAD^      			#(1) 
+$ edit code                        		#(2) 编辑代码操作
+$ git commit -a -c ORIG_HEAD  			#(3)
+```
+
+1. 当执行了提交之后，又发现代码没有提交完整，或者想重新编辑一下提交的信息，可执行 `git reset --soft HEAD^` ，让工作目录回滚到 `reset` 之前一样，不作任何改变。（`HEAD^` 表示指向 `HEAD` 之前最近的一次提交）
+2. 对工作目录下的文件做修改，例如：修改文件中的代码等。
+3. 然后使用 `reset` 之前那次提交的注释、作者、日期等信息重新提交。
+   - 注意，当执行 `git reset` 命令时，git会把老的HEAD拷贝到文件 `.git/ORIG_HEAD` 中，在命令中可以使用 ORIG_HEAD 引用这个提交。
+   - `git commit` 命令中 `-a`参数的意思是告诉 git，自动把所有修改的和删除的文件都放进暂存区，未被 git 跟踪的新建的文件不受影响。
+   - `git commit`命令中`-c <commit>` 或者 `-C <commit>`意思是拿已经提交的对象中的信息（作者，提交者，注释，时间戳等）提交，那么这条`git commit` 命令的意思就非常清晰了，把所有更改的文件加入暂存区，并使用上次的提交信息重新提交。
+
+#### 回滚最近几次提交，并把这几次提交放到指定分支中
+
+回滚最近几次提交，并把这几次提交放到叫做 `feature` 的分支上去。
+
+```
+$ git branch feature				#(1)
+$ git reset --hard HEAD~3 			#(2)
+$ git checkout feature				#(3)
+```
+
+1. 假设已经提交了一些代码，但是此时发现这些提交还不太成熟，不能合并进入主分支（`master` 分支），希望在新的分支上缓存这些改动，因此执行创建分支命令，在当前的 HEAD 上建立了新的 `feature` 分支。
+2. 然后回滚到主分支上的最近三次提交。`HEAD~3` 指向当前 `HEAD-3` 个提交，`git reset --hard HEAD~3`，即删除最近的三个提交（删除 `HEAD` 、 `HEAD^` 、`HEAD~2`）,将 HEAD 指向 `HEAD~3`
+
+#### 永久删除最后几个提交
+
+```
+$ git commit ## 执行一些提交
+$ git reset --hard HEAD~3			#(1)
+```
+
+1. 最后三个提交（即 `HEAD` 、 `HEAD^` 、`HEAD~2`）有问题，想永久删除这三个提交。
+
+#### 中断工作流程处理
+
+在实际开发中经常出现这样的情形：你正在开发一个大的新功能（工作在分支：`feature` 中），此时来了一个紧急的 BUG 需要修复，但是目前在工作区中的内容还没有成型，还不足以提交，但是又必须切换的另外的分支去修改 BUG。
+
+```
+$ git checkout feature		# you were working in 'feature' branch 
+$ work work work 			# develop new feature
+$ git commit -a -m "snapshot WIP" 						(1)
+$ git checkout master
+$ fix fix fix				# fix bug
+$ git commit				# commit with real log
+$ git checkout feature
+$ git reset --soft HEAD^ 	# go back to WIP state		(2)
+$ git reset												(3)
+```
+
+1. 这次属于临时提交，因此随便添加一个临时注释即可
+2. 这次 `reset` 删除了 WIP commit，并且把工作区设置成提交 WIP 快照之前的状态。
+3. 此时，在索引中依然遗留着“snapshot WIP”提交时所做的未提交变化，`git reset` 将会清理索引成为尚未提交”*snapshot WIP*“时的状态便于接下来继续工作。
+
+####  重置单独的一个文件
+
+假设你已经添加了一个文件进入索引，但是而后又不打算把这个文件提交，此时可以使用 `git reset` 把这个文件从索引中去除。
+
+```
+$ git reset -- index.js						(1)
+$ git commit -m "Commit files in index"		(2)
+$ git add index.js							(3)
+```
+
+1. 把文件 `index.js` 从索引中去除
+2. 把索引中的文件提交
+3. 再次把 `index.js` 加入索引
 
 ## 删除 `rm`
 
