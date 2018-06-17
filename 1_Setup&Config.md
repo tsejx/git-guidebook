@@ -1,3 +1,5 @@
+
+
 # 设置和配置
 
 
@@ -32,17 +34,11 @@ git config [<file-option>] --get-colorbool name [stdout-is-tty]
 git config [<file-option>] -e | --edit
 ```
 
-### 说明
-
-
-
-
-
 ### 用法
 
 #### 检查配置
 
-检查已有的配置信息列表
+如果你想检查已有的配置信息列表
 
 ```
 $ git config --list
@@ -52,15 +48,15 @@ $ git config --list
 
 ##### 全局配置
 
-当安装 Git 后首先要做的事情是设置用户名称和 e-mail 地址。这是非常重要的，因为每次 Git 提交都会使用该信息。它被永远的嵌入到了你的提交中：
+当安装 git 后你首先要做的事情是设置用户名称和 e-mail 地址。这是非常重要的，因为每次 git 提交都会使用该信息，它被永远的嵌入到了你的提交中。
+
+如果你想在本机其他项目内使用相同的用户信息，可以加上 `--global` 参数，这个设置只需进行一次，后续版本管理无需多次设置。
 
 ```
 $ git config --global user.name "Mercedes-benz"
 $ git config --global user.email "mercedes@gmail.com"
 # 引号内为用户名和用户邮箱
 ```
-
-重申一遍，只需要做一次这个设置。如果传递了 `--global` 选项，因为Git将总是会使用该信息来处理在系统中所做的一切操作。
 
 ##### 项目配置
 
@@ -76,21 +72,42 @@ $ git config user.email "lammborghini@gmail.com"
 
 ##### 添加配置项
 
-格式： `git config [–local|–global|–system] –add section.key value` （默认是添加在 `local` 配置中）
+如果你想添加当前项目的 git 配置项。
 
-注意add后面的 `section`, `key`, `value` 一项都不能少，否则添加失败。比如执行：
+```
+$ git config [–local|–global|–system] –add section.key value
+# 默认添加在 local 配置中
+```
+
+<details>
+
+<summary>例子</summary>
+
+注意 add 后面的 `section` 、 `key`、 `value` 一项都不能少，否则添加失败。
 
 ```
 $ git config -–add site.name yiibai
 ```
 
+</details>
+
 ##### 删除配置项
 
-格式： `git config [–local|–global|–system] –unset section.key` 
+如果你想删除当前项目的 git 配置项。
+
+```
+$ git config [–local|–global|–system] –unset section.key
+```
+
+<details>
+
+<summary>例子</summary>
 
 ```
 $ git config --local -–unset site.name
 ```
+
+</details>
 
 ## 帮助 `help`
 
@@ -98,7 +115,7 @@ $ git config --local -–unset site.name
 >
 > 显示关于Git的帮助信息
 
-`git help` 命令显示有关 Git 的帮助信息。
+如果你想知道使用 git 的一些帮助信息。
 
 ```
 $ git help
