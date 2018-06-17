@@ -23,7 +23,7 @@ git init [-q | --quiet] [--bare] [--template=<template_directory>]
 
 ####初始化新的版本仓库 
 
-`git init` 命令创建一个空的 Git 仓库或重新初始化一个现有仓库。
+如果你想新建一个 Git 代码库或重新初始化一个现有仓库。
 
 ```javascript
 $ git init
@@ -31,17 +31,17 @@ $ git init
 
 该命令将创建一个名为 `.git` 的子目录，这个子目录含有你初始化的 Git 仓库中所有的必须文件，这些文件是 Git 仓库的骨干。
 
-#### 在已存在文件的文件夹内初始化仓库
+<details>
 
-如果你是在一个**已经存在文件**的文件夹（而不是空文件夹）中初始化 Git 仓库来进行版本控制的话，你应该开始跟踪这些文件并提交。 
+<summary>扩展</summary>
 
-你可通过 `git add` 命令来实现对指定文件的跟踪，然后执行 `git commit` 提交
+新建一个目录，将其初始化为Git代码库。`<project-name>` 为新建代码库的名称。
 
 ```
-$ git add *.c
-$ git add LICENSE
-$ git commit -m 'initial project version'
+$ git init <project-name>
 ```
+
+</details>
 
 ## 克隆 `clone`
 
@@ -71,21 +71,34 @@ git clone [--template=<template_directory>]
 
 #### 克隆现有的仓库
 
-创建一个仓库的克隆版本的命令格式是 `git clone [url]` 。比如，要克隆 Git 的可连接库 jquery，可以用下面的命令。
+克隆一个现有项目和它的整个版本历史。`<url>` 为项目路径，该路径可为本地路径，亦可为远程服务端路径。
 
 ```
-$ git clone https://github.com/jquery/jquery.git
+$ git clone <url>
 ```
 
-该命令会在本地主机生成一个目录，与远程主机的版本库同名。
+##### 本地仓库
 
-#### 克隆现有的仓库并重命名
+执行如下命令以创建一个本地仓库的克隆版本。
+
+```
+$ git clone /path/to/repository
+```
+
+##### 远程仓库
+
+如下命令会在本地主机生成一个目录，与远程主机的版本库同名。
+
+```
+$ git clone username@host:/path/to/repository
+```
+
+#### 克隆现有的仓库并进行其他操作
+
+##### 重命名
 
 ```
 git clone https://github.com/jquery/jquery.git 'jQuery'
 ```
 
 这将执行与上一个命令相同的操作，不过在本地创建的仓库名字变为 `jQuery` 
-
-
-
