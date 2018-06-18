@@ -1,8 +1,15 @@
 # 分支与合并
 
+**目录：分支与合并**
 
+- 分支 `branch`
+- 查看 `checkout` 
+- 合并 `merge`
+- 储藏 `stash`
+- 标签 `tag`
+- worktree
 
-# 分支 `branch`
+## 分支 `branch`
 
 > List, create, or delete branches
 >
@@ -26,13 +33,19 @@ git stash create [<message>]
 git stash store [-m|--message <message>] [-q|--quiet] <commit>
 ```
 
-### 说明
-
-
-
 ### 用法
 
-#### 查看当前分支
+#### 查看分支
+
+##### 查看所有分支
+
+```
+$ git branch
+```
+
+<details>
+
+<summary>例子</summary>
 
 ```
 $ git branch
@@ -42,27 +55,23 @@ $ git branch
 
 上面显示结果中，当前有两个分支：**master** 和 **release/1.0.0**，当前在 **release/1.0.0** 分支上，它前面有个星号(`*`)。
 
-#### 新建一个分支
+</details>
+
+##### 查看远程分支
 
 ```
-$ git branch dev/1.0.0
+$ git branch -r
 ```
 
-上面命令新建一个名为 `dev/1.0.0` 的分支
-
-#### 切换到指定分支
+##### 查看本地分支和远程分支
 
 ```
-$ git checkout dev/1.0.0
-
-# 再次查看分支
-$ git branch
-* dev/1.0.0
-  master
-  release/1.0.0
+$ git branch -a
 ```
 
-#### 查看本地和远程分支
+<details>
+
+<summary>例子</summary>
 
 ```
 $ git branch -a
@@ -74,33 +83,97 @@ $ git branch -a
   remotes/origin/release/1.0.0
 ```
 
-#### 将更改添加到新建分支上
+</details>
+
+#### 新建分支
+
+##### 新建分支但并不切换分支
+
+新建一个分支，但依然停留在当前分支。`<branch-name>` 为新建分支名称。
 
 ```
-# 省略提交到本地存储仓库等步骤 git status -> git add -> git commit 
-$ git push origin dev/1.0.0
+$ git branch <branch-name>
 ```
 
-#### 修改本地分支名称
+<details>
+
+<summary>例子</summary>
+
+```
+$ git branch dev/1.0.0
+```
+
+上面命令新建一个名为 `dev/1.0.0` 的分支
+
+</details>
+
+##### 新建分支并切换到该分支
+
+```
+$ git checkout -b <branch>
+```
+
+##### 新建一个分支，指向指定commit
+
+```
+$ git branch <branch> <commit>
+```
+
+##### 新建一个分支，与指定的远程分支建立追踪关系
+
+```
+$ git branch --track <branch> <remote-branch>
+```
+
+#### 切换分支
+
+切换到指定分支。`<branch>` 为切换到的分支。
+
+```
+$ git checkout <branch>
+```
+
+<details>
+
+<summary>例子</summary>
+
+```
+$ git checkout dev/1.0.0
+```
+
+</details>
+
+#### 修改分支
+
+修改指定分支名称。`<branch-name>` 为指定分支新名称。
+
+```
+$ git branch -m <branch-name>
+```
+
+<details>
+
+<summary>例子</summary>
 
 ```
 $ git branch -m dev/1.0.0 develop/1.0.0
-
-# 查看远程分支
-$ git branch -r
-  origin/HEAD -> origin/master
-  origin/master
-  origin/release/1.0.0
-  origin/dev/1.0.0
-  
-# 查看本地分支
-$ git branch
-  master
-  release/1.0.0
-  develop/1.0.0
 ```
 
-#### 删除远程分支
+</details>
+
+#### 删除分支
+
+##### 删除本地分支
+
+通过如下命令可以删除指定本地分支。`<branch>` 为分支名称。
+
+```
+$ git branch -d <branch>
+```
+
+<details>
+
+<summary>例子</summary>
 
 删除一个名称为 **dev/1.0.0** 的远程分支
 
@@ -108,30 +181,146 @@ $ git branch
 $ git push origin --delete dev/1.0.0
 ```
 
-#### 合并某个分支到当前分支
+</details>
+
+##### 删除远程分支
+
+通过如下命令可以删除指定的远程分支。
 
 ```
-$ git branch
-  master
-* develop/1.0.0
-  release/1.0.0
-  
-$ git checkout master
-Switched to branch 'master'
-Your branch is up-to-date with 'origin/master'
-
-$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'
-nothing to commit, working diretory clean
-
-$ git merge develop/1.0.0
-Updating ...
-Fast-forward
-...
+$ git push origin --delete <branch>
+$ git branch -dr [remote/branch]
 ```
 
-# 储藏 `stash`
+<details>
+
+<summary>例子</summary>
+
+删除一个名称为 **dev/1.0.0** 的远程分支
+
+```
+$ git push origin --delete dev/1.0.0
+```
+
+</details>
+
+## 查看 `checkout`
+
+> Switch branches or restore working tree files
+>
+> 切换分支或恢复工作树文件。
+
+### 语法
+
+```
+git checkout [-q] [-f] [-m] [<branch>]
+git checkout [-q] [-f] [-m] --detach [<branch>]
+git checkout [-q] [-f] [-m] [--detach] <commit>
+git checkout [-q] [-f] [-m] [[-b|-B|--orphan] <new_branch>] [<start_point>]
+git checkout [-f|--ours|--theirs|-m|--conflict=<style>] [<tree-ish>] [--] <paths>…
+git checkout [-p|--patch] [<tree-ish>] [--] [<paths>…]
+```
+
+### 用法
+
+#### 撤销/恢复
+
+##### 恢复暂存区的指定文件到工作区
+
+```
+$ git checkout <file>
+```
+
+##### 恢复某个commit的指定文件到暂存区和工作区
+
+```
+$ git checkout <commit> <file>
+```
+
+##### 恢复暂存区的所有文件到工作区
+
+```
+$ git checkout .
+```
+
+#### 切换分支
+
+```
+$ git checkout <branch>
+```
+
+##### 切换到指定分支，并更新工作区
+
+```
+$ git checkout <branch-name>
+```
+
+##### 切换到上一个分支
+
+```
+$ git checkout -
+```
+
+#### 替换本地改动
+
+假如你操作失误，你可以使用如下命令替换本地改动
+
+```
+$ git checkout -- <filename>
+```
+
+此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到暂存区的改动以及新文件都不会受到影响。
+
+#### 创建分支并切换分支
+
+通过如下命令可以创建一个自定义命名的分支，并切换到该分支上。`<branch>` 为分支命名。
+
+```
+$ git checkout -b <branch>
+```
+
+<details>
+
+<summary>例子</summary>
+
+创建一个命名为 feature_x 的分支，并切换到该分支上。
+
+```
+$ git checkout -b feature_x
+```
+
+</details>
+
+## 合并 `merge`
+
+> Join two or more development histories together
+>
+> 用于将两个或两个以上的开发历史加入(合并)一起。
+
+### 语法
+
+```
+git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]
+    [-s <strategy>] [-X <strategy-option>] [-S[<keyid>]]
+    [--[no-]allow-unrelated-histories]
+    [--[no-]rerere-autoupdate] [-m <msg>] [<commit>…]
+git merge --abort
+git merge --continue
+```
+
+### 用法
+
+#### 合并分支
+
+以在你的工作目录中*获取（fetch）* 并 *合并（merge）*远端的改动。
+
+如果你要合并指定分支到当前分支。`branch` 为需要合并到当前分支的名称。
+
+```
+$ git merge <branch1> <branch2> ...
+```
+
+## 储藏 `stash`
 
 > Stash the changes in a dirty working directory away
 >
@@ -259,3 +448,87 @@ Switched to a new branch "testchanges"
 Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
 ```
 
+
+
+## 标签 `tag`
+
+> Create, list, delete or verify a tag object signed with GPG
+>
+> 用于创建，列出，删除或验证使用GPG签名的标签对象
+
+### 语法
+
+```
+git tag [-a | -s | -u <keyid>] [-f] [-m <msg> | -F <file>]
+    <tagname> [<commit> | <object>]
+git tag -d <tagname>…
+git tag [-n[<num>]] -l [--contains <commit>] [--no-contains <commit>]
+    [--points-at <object>] [--column[=<options>] | --no-column]
+    [--create-reflog] [--sort=<key>] [--format=<format>]
+    [--[no-]merged [<commit>]] [<pattern>…]
+git tag -v [--format=<format>] <tagname>…
+```
+
+### 用法
+
+#### 查看标签
+
+##### 查看所有标签
+
+```
+$ git tag
+```
+
+##### 查看标签信息
+
+```
+$ git show <tag>
+```
+
+#### 提交标签
+
+##### 提交指定标签
+
+```
+$ git push <remote> <tag>
+```
+
+##### 提交所有标签
+
+```
+$ git push <remote> --tags
+```
+
+#### 新建标签
+
+##### 在指定提交中新建标签
+
+```
+$ git tag [tag] [commit]
+```
+
+##### 在当前提交新建标签
+
+```
+$ git tag <tag>
+```
+
+#####  新建分支指向标签
+
+```
+$ git checkout -b [branch] [tag]
+```
+
+#### 删除标签
+
+#####删除本地标签
+
+ ```
+$ git tag -d [tag]
+ ```
+
+##### 删除远程标签
+
+```
+$ git push origin :refs/tags/[tagName]
+```
