@@ -1,8 +1,13 @@
-
-
 # 基本快照
 
+**目录：基本快照**
 
+-  添加`add`
+- 状态 `status`
+- 提交 `commit`
+- 回滚 `reset`
+- 删除 `rm`
+- 移动和重命名 `mv`
 
 ## 添加 `add`
 
@@ -10,7 +15,7 @@
 >
 > 将文件内容添加到索引
 
-`git add` 命令将文件内容添加到索引(将修改添加到暂存区)。也就是将要提交的文件的信息添加到索引库中。
+`git add` 命令将文件内容添加到索引(将修改记录添加到暂存区)。也就是将要提交的文件的信息添加到索引库中。
 
 ### 语法
 
@@ -33,15 +38,49 @@ git add [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] [-
 
 ### 用法
 
-#### 添加到暂存区
+#### 添加版本修改记录到暂存区
 
-通常是通过 `git add <path>` 的形式把 `<path>` 添加到索引库中，`<path>` 可以是文件也可以是目录。
+通过如下命令能判断已修改（不包括已删除）的文件和新添的文件，并把它们的信息添加到索引库(Index)中。
 
-git不仅能判断出 `<path>` 中，修改（不包括已删除）的文件，还能判断出新添的文件，并把它们的信息添加到索引库中。
+##### 指定文件
+
+添加指定文件到暂存区
 
 ```
-$ git add .  # 将所有修改添加到暂存区
-$ git add *  # Ant风格添加修改
+$ git add <file1> <file2> <file3> ...
+```
+
+##### 文件目录
+
+添加指定目录到暂存区，包括子目录
+
+```
+$ git add <dir>
+```
+
+##### 所有目录文件
+
+添加当前目录的所有文件到暂存区
+
+```
+$ git add .
+```
+
+##### 分次提交
+
+添加每个变化前，都会要求确认。
+
+对于同一个文件的多处变化，可以实现分次提交。
+
+```
+$ git add -p
+```
+
+<details>
+
+<summary>命令扩展</summary>
+
+```
 $ git add *Controller   # 将以Controller结尾的文件的所有修改添加到暂存区
 
 $ git add Hello*   # 将所有以Hello开头的文件的修改添加到暂存区 例如:HelloWorld.txt,Hello.java,HelloGit.txt ...
@@ -49,13 +88,7 @@ $ git add Hello*   # 将所有以Hello开头的文件的修改添加到暂存区
 $ git add Hello?   # 将以Hello开头后面只有一位的文件的修改提交到暂存区 例如:Hello1.txt,HelloA.java 如果是HelloGit.txt或者Hello.java是不会被添加的$ git add [file1] [file2] ...
 ```
 
-
-
-- 添加每个变化前，都会要求确认。对于同一个文件的多处变化，可以实现分次提交。
-
-```
-$ git add -p
-```
+</details>
 
 #### 添加跟踪文件到暂存区
 
@@ -65,7 +98,7 @@ $ git add -p
 $ git add -u [<path>]
 ```
 
-#### 添加已修改、已删除以及未跟踪文件到暂存区
+#### 添加已修改、已删除以及未跟踪文件修改记录到暂存区
 
 表示把中所有跟踪文件中被修改过或已删除文件和所有未跟踪的文件信息添加到索引库。省略 `<path>` 表示  `.` ,即当前目录。
 
@@ -87,7 +120,7 @@ $ git add -i [<path>]
 >
 > 显示工作树的状态
 
-`git status` 命令用于显示工作目录和暂存区的状态。使用此命令能看到那些修改被暂存到了，哪些没有，, 哪些文件没有被 Git 跟踪到。
+`git status` 命令用于显示工作目录和暂存区的状态。使用此命令能看到那些修改被暂存到了，哪些没有，, 哪些文件没有被 git 跟踪到。
 
 `git status` 不显示已经 `commit` 到项目历史中去的信息。看项目历史的信息要使用 `git log`。
 
@@ -99,9 +132,13 @@ git status [<options>…] [--] [<pathspec>…]
 
 ### 说明
 
-显示索引文件和当前 HEAD 提交之间的差异，在工作树和索引文件之间有差异的路径以及工作树中没有被 Git 跟踪的路径。 第一个是通过运行 `git commit` 来提交的；第二个和第三个是你可以通过在运行 `git commit` 之前运行 `git add` 来提交的。
+显示索引文件和当前 HEAD 提交之间的差异，在工作树和索引文件之间有差异的路径以及工作树中没有被 git 跟踪的路径。 第一个是通过运行 `git commit` 来提交的；第二个和第三个是你可以通过在运行 `git commit` 之前运行 `git add` 来提交的。
 
 `git status` 相对来说是一个简单的命令，它简单的展示状态信息。输出的内容分为3个分类/组。
+
+<details>
+
+<summary>例子</summary>
 
 ```
 # On branch master
@@ -122,9 +159,11 @@ git status [<options>…] [--] [<pathspec>…]
 #hello.pyc
 ```
 
+</details>
+
 ### 用法
 
-#### 检查仓库版本更改
+#### 查看代码仓库版本更改
 
 在每次执行 `git commit` 之前先使用 `git status` 检查文件状态是一个很好的习惯, 这样能防止你不小心提交了您不想提交的东西。 下面的例子展示 stage 前后的状态, 并最后提交一个快照。
 
@@ -132,69 +171,6 @@ git status [<options>…] [--] [<pathspec>…]
 
 ```
 $ git status
-```
-
-## 差异 `diff`
-
->Show changes between commits, commit and working tree, etc
->
->在提交，提交和工作树等之间显示更改
-
-### 语法
-
-```
-git diff [options] [<commit>] [--] [<path>…]
-git diff [options] --cached [<commit>] [--] [<path>…]
-git diff [options] <commit> <commit> [--] [<path>…]
-git diff [options] <blob> <blob>
-git diff [options] [--no-index] [--] <path> <path>
-```
-
-### 说明
-
-`git diff` 命令用于显示提交和工作树等之间的更改。此命令比较的是工作目录中当前文件和暂存区域快照之间的差异,也就是修改之后还没有暂存起来的变化内容。
-
-在工作树和索引或树之间显示更改，索引和树之间的更改，两个树之间的更改，两个blob对象之间的更改或两个文件在磁盘上的更改。
-
-### 用法
-
-#### 查看尚未暂存的文件差异
-
-此命令比较的是工作目录（Working tree）和暂存区域快照（index）之间的差异 也就是修改之后还没有暂存起来的变化内容。 
-
-```
-$ git diff
-```
-
-#### 查看暂存文件和上次快照之间的差异
-
-```
-$ git diff --cached
-$ git diff --staged
-```
-
-#### 显示工作版本和HEAD的差异
-
-```
-$ git diff HEAD
-```
-
-#### 查看两个分支最新提交的差异
-
-```
-$ git diff topic master
-```
-
-#### 查看当前目录和另一个分支(`test`)的差异
-
-```
-$ git diff test
-```
-
-#### 比较两个历史版本之间的差异
-
-```
-$ git diff SHA1 SHA2
 ```
 
 ## 提交 `commit`
@@ -232,28 +208,59 @@ git commit [-a | --interactive | --patch] [-s] [-v] [-u<mode>] [--amend]
 
 ### 用法
 
-#### 提交所有已修改文件
+#### 提交暂存区到本地仓库区
 
-会先把所有已经 track 的文件的改动 `git add` 进来，然后提交(有点像svn的一次提交,不用先暂存)。对于没有track的文件,还是需要执行 `git add <file>`  命令。
+如果你想将通过 `git add` 存入暂存区(Index)的文件修改记录提交到本地仓库区，你可以使用如下的命令。`<message>` 表示你对这次提交记录的描述，需要使用引号包括。如果文件已修改但未添至暂存区，则提交时不会提交任何修改。
 
 ```
-$ git commit -a
+$ git commit -m <message>
 ```
 
-#### 提交缓存区文件至本地仓库区
+<details>
 
-该命令会将 `git add` 存入暂存区修改内容提交至本地仓库中，若文件未添加至暂存区，则提交时不会提交任何修改。
+<summary>例子</summary>
 
 ```
 $ git commit -m 'the commit messge'
 ```
 
+</details>
+
+如果你想将暂存区指定的文件修改提交到本地仓库区，你可以使用如下的命令。`<file>` 表示你要提交的文件路径，文件可以是多个。
+
+```
+$ git commit <file1> <file2> ... -m <message>
+```
+
+#### 提交工作区有版本记录文件
+
+如果你想将工作区所有自上一次提交(commit)之后的变化直接提交到仓库区，你可以使用如下命令，相当于省略了 `git add`。对于还没有 track 的文件，还是需要执行 `git add <file>` 命令。
+
+```
+$ git commit -a
+```
+
+#### 提交时显示所有 diff 信息
+
+```
+$ git commit -v
+```
+
 #### 增补提交文件
+
+如果你想重做上一次commit，并包括指定文件的新变化，那么你可以使用如下命令。
 
 增补提交，会使用与当前提交节点相同的父节点进行一次新的提交，旧的提交将会被取消。
 
 ```
-$ git commit -amend
+$ git commit -amend <file1> <file2>
+```
+
+如果你想使用一次新的提交(commit)，替代上一次提交，那么你可以使用如下命令。如果代码没有任何新变化，则用来改写上一次commit的提交信息
+
+
+```
+$ git commit -amend -m <message>
 ```
 
 ## 回滚 `reset`
@@ -270,13 +277,39 @@ git reset (--patch | -p) [<tree-ish>] [--] [<paths>…]
 git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [<commit>]
 ```
 
-### 说明
-
-
-
-
-
 ### 用法
+
+#### 重置暂存区
+
+重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+
+```
+$ git reset <file>
+```
+
+重置暂存区与工作区，与上一次commit保持一致
+
+```
+$ git reset --hard
+```
+
+重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
+
+```
+$ git reset <commit>
+```
+
+重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致 
+
+```
+$ git reset --hard <commit>
+```
+
+重置当前HEAD为指定commit，但保持暂存区和工作区不变
+
+```
+$ git reset --keep <commit>
+```
 
 #### 回滚添加操作
 
@@ -367,8 +400,61 @@ $ git add index.js							(3)
 
 ## 删除 `rm`
 
+> Remove files from the working tree and from the index
+>
+> 用于从工作区和索引中删除文件
 
+### 语法
 
+```
+git rm [-f | --force] [-n] [-r] [--cached] [--ignore-unmatch] [--quiet] [--] <file>…
+```
 
+### 用法
+
+如果你想删除工作区文件，并且将这次删除的记录放入暂存区。
+
+```
+$ git rm <file1> <file2> ...
+```
+
+如果你想停止追踪指定文件，并将该文件保留在工作区。
+
+```
+$ git rm --cached <file>
+```
 
 ## 移动和重命名 `mv`
+
+> Move or rename a file, a directory, or a symlin
+>
+> 用于移动或重命名文件，目录或符号链接。
+
+### 语法
+
+```
+git mv <options>… <args>…
+```
+
+### 用法
+
+#### 移动或重命名文件
+
+##### 重命名文件
+
+如果你想重命名文件，并且将这个改名放入暂存区。`source` 必须存在，并且是文件，符号链接或目录。`destination` 为重命名后的名称。
+
+```
+$ git mv <source> <destination>
+```
+
+##### 移动文件
+
+移动 `<source>` 到 `<destination directory>` 。最后一个参数必须是现有目录。
+
+索引在成功完成后更新，但仍必须提交更改。
+
+```
+$ git mv <source> ... <destination directory>
+```
+
