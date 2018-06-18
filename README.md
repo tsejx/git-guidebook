@@ -7,7 +7,6 @@ Git-GuideBook 致力于汇集整理日常工作中比较常用 Git 版本管理�
 ## :bookmark:项目目录
 
 - 设置和配置
-  - git
   - 配置 `config`
   - 帮助 `help`
 - 获取和创建项目
@@ -25,10 +24,8 @@ Git-GuideBook 致力于汇集整理日常工作中比较常用 Git 版本管理�
   - 分支 `branch`
   - 查看 `checkout` 
   - 合并 `merge`
-  - 日志 `log`
   - 储藏 `stash`
   - 标签 `tag`
-  - worktree
 - 共享和更新项目
   - 提取 `fetch`
   - 拉取 `pull`
