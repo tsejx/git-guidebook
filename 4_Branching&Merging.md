@@ -2,7 +2,7 @@
 
 **目录：分支与合并**
 
-- [分支 `branch`](#分支branch)
+- [分支 `branch`](#分支-branch)
 - [查看 `checkout`](#查看checkout)
 - [合并 `merge`](#合并merge)
 - [储藏 `stash`](#储藏stash)
