@@ -2,10 +2,10 @@
 
 **目录：检查和比较**
 
-- [日志 `log`](#日志 `log`)
-- [差异 `diff`](#差异 `diff`)
+- [日志 `log`](#日志log)
+- [差异 `diff`](#差异diff)
 
-## 日志 `log`
+## 日志log
 
 > Show commit logs
 >
@@ -111,7 +111,7 @@ $ git log --graph --oneline --decorate --all
 $ git log --name-status
 ```
 
-## 差异 `diff`
+## 差异diff
 
 > how changes between commits, commit and working tree, etc
 >
