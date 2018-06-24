@@ -7,7 +7,7 @@ Git-GuideBook 致力于汇集整理日常工作中比较常用 Git 版本管理�
 ## :bookmark:项目目录
 
 - 设置和配置
-  - 配置 `config`
+  - [配置 `config`](1_Setup%26Config.md#配置-config)
   - 帮助 `help`
 - 获取和创建项目
   - 初始化 `init`
