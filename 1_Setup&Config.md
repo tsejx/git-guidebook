@@ -2,7 +2,8 @@
 
 # 设置和配置
 
-
+- [配置 `config`](#配置 `config`)
+- [帮助 `help`](#帮助 `help`)
 
 ## 配置 `config`
 

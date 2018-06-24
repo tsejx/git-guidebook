@@ -2,11 +2,11 @@
 
 **目录：分支与合并**
 
-- 分支 `branch`
-- 查看 `checkout` 
-- 合并 `merge`
-- 储藏 `stash`
-- 标签 `tag`
+- [分支 `branch`](#分支 `branch`)
+- [查看 `checkout`](#查看 `checkout`)
+- [合并 `merge`](#合并 `merge`)
+- [储藏 `stash`](#储藏 `stash`)
+- [标签 `tag`](#标签 `tag`)
 - worktree
 
 ## 分支 `branch`

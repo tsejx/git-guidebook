@@ -2,12 +2,12 @@
 
 **目录：基本快照**
 
--  添加`add`
-- 状态 `status`
-- 提交 `commit`
-- 回滚 `reset`
-- 删除 `rm`
-- 移动和重命名 `mv`
+-  [添加`add`](#添加 `add`)
+- [状态 `status`](#状态 `status`)
+- [提交 `commit`](#提交 `commit`)
+- [回滚 `reset`](#回滚 `reset`)
+- [删除 `rm`](#删除 `rm`)
+- [移动和重命名 `mv`](#移动和重命名 `mv`)
 
 ## 添加 `add`
 

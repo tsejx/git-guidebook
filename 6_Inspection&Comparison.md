@@ -1,5 +1,10 @@
 # 检查和比较
 
+**目录：检查和比较**
+
+- [日志 `log`](#日志 `log`)
+- [差异 `diff`](#差异 `diff`)
+
 ## 日志 `log`
 
 > Show commit logs
