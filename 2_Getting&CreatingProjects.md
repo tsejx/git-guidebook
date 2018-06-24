@@ -1,16 +1,18 @@
 # 获取和创建项目
 
+## 目录
+
 **目录：获取和创建项目**
 
-- [初始化 `init`](#初始化init)
-- [克隆 `clone`](#克隆clone)
+- [初始化 `init`](#初始化-init)
+- [克隆 `clone`](#克隆-clone)
 
 有两种取得 Git 项目仓库的方法。 
 
 - 第一种是在现有项目或目录下导入所有文件到 Git 中。
 -  第二种是从一个服务器克隆一个现有的 Git 仓库。
 
-## 初始化init
+## 初始化 `init`
 
 > Create an empty Git repository or reinitialize an existing one
 >
@@ -48,7 +50,11 @@ $ git init <project-name>
 
 </details>
 
-## 克隆clone
+<br>
+
+[⬆回到顶端](#目录)
+
+## 克隆 `clone`
 
 > Clone a repository into a new directory
 >
@@ -107,3 +113,7 @@ git clone https://github.com/jquery/jquery.git 'jQuery'
 ```
 
 这将执行与上一个命令相同的操作，不过在本地创建的仓库名字变为 `jQuery` 
+
+<br>
+
+[⬆回到顶端](#目录)

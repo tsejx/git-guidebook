@@ -1,15 +1,17 @@
 # 基本快照
 
+## 目录
+
 **目录：基本快照**
 
--  [添加`add`](#添加add)
-- [状态 `status`](#状态status)
-- [提交 `commit`](#提交commit)
-- [回滚 `reset`](#回滚reset)
-- [删除 `rm`](#删除rm)
-- [移动和重命名 `mv`](#移动和重命名mv)
+-  [添加`add`](#添加-add)
+- [状态 `status`](#状态-status)
+- [提交 `commit`](#提交-commit)
+- [回滚 `reset`](#回滚-reset)
+- [删除 `rm`](#删除-rm)
+- [移动和重命名 `mv`](#移动和重命名-mv)
 
-## 添加add
+## 添加 `add`
 
 > Add file contents to the index
 >
@@ -114,7 +116,11 @@ $ git add -A
 $ git add -i [<path>]
 ```
 
-## 状态status
+<br>
+
+[⬆回到顶端](#目录)
+
+## 状态 `status`
 
 > Show the working tree status
 >
@@ -173,7 +179,11 @@ git status [<options>…] [--] [<pathspec>…]
 $ git status
 ```
 
-## 提交commit
+<br>
+
+[⬆回到顶端](#目录)
+
+## 提交 `commit`
 
 > Record changes to the repository
 >
@@ -263,7 +273,11 @@ $ git commit -amend <file1> <file2>
 $ git commit -amend -m <message>
 ```
 
-## 回滚reset
+<br>
+
+[⬆回到顶端](#目录)
+
+## 回滚 `reset`
 
 > Reset current HEAD to the specified state
 >
@@ -398,7 +412,11 @@ $ git add index.js							(3)
 2. 把索引中的文件提交
 3. 再次把 `index.js` 加入索引
 
-## 删除rm
+<br>
+
+[⬆回到顶端](#目录)
+
+## 删除 `rm`
 
 > Remove files from the working tree and from the index
 >
@@ -424,7 +442,11 @@ $ git rm <file1> <file2> ...
 $ git rm --cached <file>
 ```
 
-## 移动和重命名mv
+<br>
+
+[⬆回到顶端](#目录)
+
+## 移动和重命名 `mv`
 
 > Move or rename a file, a directory, or a symlin
 >
@@ -458,3 +480,6 @@ $ git mv <source> <destination>
 $ git mv <source> ... <destination directory>
 ```
 
+<br>
+
+[⬆回到顶端](#目录)

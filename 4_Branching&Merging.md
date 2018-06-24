@@ -1,12 +1,14 @@
 # 分支与合并
 
+## 目录
+
 **目录：分支与合并**
 
 - [分支 `branch`](#分支-branch)
-- [查看 `checkout`](#查看checkout)
-- [合并 `merge`](#合并merge)
-- [储藏 `stash`](#储藏stash)
-- [标签 `tag`](#标签tag)
+- [查看 `checkout`](#查看-checkout)
+- [合并 `merge`](#合并-merge)
+- [储藏 `stash`](#储藏-stash)
+- [标签 `tag`](#标签-tag)
 - worktree
 
 ## 分支 `branch`
@@ -204,6 +206,10 @@ $ git push origin --delete dev/1.0.0
 
 </details>
 
+<br>
+
+[⬆回到顶端](#目录)
+
 ## 查看 `checkout`
 
 > Switch branches or restore working tree files
@@ -291,6 +297,10 @@ $ git checkout -b feature_x
 
 </details>
 
+<br>
+
+[⬆回到顶端](#目录)
+
 ## 合并 `merge`
 
 > Join two or more development histories together
@@ -319,6 +329,10 @@ git merge --continue
 ```
 $ git merge <branch1> <branch2> ...
 ```
+
+<br>
+
+[⬆回到顶端](#目录)
 
 ## 储藏 `stash`
 
@@ -448,7 +462,9 @@ Switched to a new branch "testchanges"
 Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
 ```
 
+<br>
 
+[⬆回到顶端](#目录)
 
 ## 标签 `tag`
 
@@ -532,3 +548,6 @@ $ git tag -d [tag]
 ```
 $ git push origin :refs/tags/[tagName]
 ```
+<br>
+
+[⬆回到顶端](#目录)

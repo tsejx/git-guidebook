@@ -2,10 +2,12 @@
 
 # 设置和配置
 
-- [配置 `config`](#配置config)
-- [帮助 `help`](#帮助help)
+## 目录
 
-## 配置config
+- [配置 `config`](#配置-config)
+- [帮助 `help`](#帮助-help)
+
+## 配置 `config`
 
 > Get and set repository or global options
 >
@@ -110,7 +112,9 @@ $ git config --local -–unset site.name
 
 </details>
 
-## 帮助help
+<br>[⬆回到顶端](#目录)
+
+## 帮助 `help`
 
 > Display help information about Git
 >
@@ -122,3 +126,6 @@ $ git config --local -–unset site.name
 $ git help
 ```
 
+<br>
+
+[⬆回到顶端](#目录)
