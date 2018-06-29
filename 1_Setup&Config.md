@@ -39,78 +39,126 @@ git config [<file-option>] -e | --edit
 
 ### 用法
 
-#### 检查配置
+#### 展示所有命令和配置信息
 
-如果你想检查已有的配置信息列表
+**注意：** 配置信息分为：当前目录（local）和全局（golbal）的配置信息，默认为当前目录的配置信息。
 
+```bash
+$ git config --local --list (当前目录)
+$ git config --global --list (全局)
 ```
-$ git config --list
-```
 
-#### 配置用户名和密码
-
-##### 全局配置
+#### 配置开发者信息
 
 当安装 git 后你首先要做的事情是设置用户名称和 e-mail 地址。这是非常重要的，因为每次 git 提交都会使用该信息，它被永远的嵌入到了你的提交中。
 
 如果你想在本机其他项目内使用相同的用户信息，可以加上 `--global` 参数，这个设置只需进行一次，后续版本管理无需多次设置。
 
-```
-$ git config --global user.name "Mercedes-benz"
-$ git config --global user.email "mercedes@gmail.com"
-# 引号内为用户名和用户邮箱
-```
-
-##### 项目配置
-
 如果希望在一个特定的项目中使用不同的名称或 `e-mail` 地址，可以在该项目中运行该命令而不要 `--global` 选项。
 
-```
-$ git config user.name "Lamborghini"
-$ git config user.email "lammborghini@gmail.com"
-# 引号内为用户名和用户邮箱
-```
+```bash
+# 全局配置
+$ git config --global user.name <name>
+$ git config --global user.email <email>
 
-#### 添加/删除配置项
-
-##### 添加配置项
-
-如果你想添加当前项目的 git 配置项。
-
-```
-$ git config [–local|–global|–system] –add section.key value
-# 默认添加在 local 配置中
+# 当前目录配置
+$ git config user.name <name>
+$ git config user.email <email>
 ```
 
 <details>
 
-<summary>例子</summary>
+<summary>示例</summary>
+
+```bash
+$ git config --global user.name "Mercedes-benz"
+$ git config --global user.email "mercedes@gmail.com"
+
+$ git config user.name "Lamborghini"
+$ git config user.email "lammborghini@gmail.com"
+```
+
+</details>
+
+#### 添加配置项
+
+如果你想添加当前项目的 git 配置项。默认添加在 local 配置中。
+
+```bash
+# 当前目录
+$ git config --local –add <entry-name>
+
+# 全局环境
+$ git config --global –add <entry-name>
+
+# 系统
+$ git config --system –add <entry-name>
+```
+
+<details>
+
+<summary>示例</summary>
 
 注意 add 后面的 `section` 、 `key`、 `value` 一项都不能少，否则添加失败。
 
-```
+```bash
 $ git config -–add site.name yiibai
 ```
 
 </details>
 
-##### 删除配置项
+#### 删除配置项
 
-如果你想删除当前项目的 git 配置项。
+`entry-name` 为配置项名称。
 
-```
-$ git config [–local|–global|–system] –unset section.key
+```bash
+# 当前目录
+$ git config --local --unset <entry-name>
+
+# 全局环境
+$ git config --global--unset <entry-name>
+
+# 系统环境
+$ git config --system --unset <entry-name>
 ```
 
 <details>
 
-<summary>例子</summary>
+<summary>示例</summary>
 
-```
+```bash
 $ git config --local -–unset site.name
 ```
 
 </details>
+
+#### 给git命令起别名
+
+简化命令。
+
+```bash
+$ git config --global alias.<handle> <command>
+```
+
+<details>
+
+<summary>示例</summary>
+
+`git status` 改成 `git st` ，这样可以简化命令。
+
+```bash
+$ git config --global alias.st status
+```
+
+</details>
+
+#### 忽略文件的权限变化
+
+不再将文件的权限变化视作改动。
+
+```bash
+$ git config core.fileMode false
+```
 
 <br>[⬆回到顶端](#目录)
 
@@ -120,10 +168,10 @@ $ git config --local -–unset site.name
 >
 > 显示关于Git的帮助信息
 
-如果你想知道使用 git 的一些帮助信息。
+#### 展示帮助信息
 
-```
-$ git help
+```bash
+$ git help -g
 ```
 
 <br>
