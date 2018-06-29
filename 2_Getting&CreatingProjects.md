@@ -28,11 +28,9 @@ git init [-q | --quiet] [--bare] [--template=<template_directory>]
 
 ### 用法
 
-####初始化新的版本仓库 
+#### 初始化新的版本仓库 
 
-如果你想新建一个 Git 代码库或重新初始化一个现有仓库。
-
-```javascript
+```bash
 $ git init
 ```
 
@@ -44,7 +42,7 @@ $ git init
 
 新建一个目录，将其初始化为Git代码库。`<project-name>` 为新建代码库的名称。
 
-```
+```bash
 $ git init <project-name>
 ```
 
@@ -80,39 +78,43 @@ git clone [--template=<template_directory>]
 
 ### 用法
 
-#### 克隆现有的仓库
+#### 克隆本地仓库
 
-克隆一个现有项目和它的整个版本历史。`<url>` 为项目路径，该路径可为本地路径，亦可为远程服务端路径。
+克隆一个现有项目和它的整个版本历史。`<url>` 为项目路径，该路径可为本地路径，亦可是远程服务端路径。
 
-```
+```bash
 $ git clone <url>
 ```
 
-##### 本地仓库
+<details>
 
-执行如下命令以创建一个本地仓库的克隆版本。
+<summary>示例</summary>
 
-```
+```bash
+# 本地仓库
 $ git clone /path/to/repository
-```
 
-##### 远程仓库
-
-如下命令会在本地主机生成一个目录，与远程主机的版本库同名。
-
-```
+# 远程仓库
 $ git clone username@host:/path/to/repository
 ```
 
-#### 克隆现有的仓库并进行其他操作
+</details>
 
-##### 重命名
+#### 克隆仓库到指定到分支
 
+```bash
+$ git clone -b <branch-name> --single-branch <url>
 ```
-git clone https://github.com/jquery/jquery.git 'jQuery'
+
+<details>
+
+<summary>示例</summary>
+
+```bash
+$ git clone -b <branch-name> --single-branch https://github.com/user/repo.git
 ```
 
-这将执行与上一个命令相同的操作，不过在本地创建的仓库名字变为 `jQuery` 
+</details>
 
 <br>
 
