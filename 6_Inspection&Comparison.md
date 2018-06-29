@@ -27,22 +27,27 @@ git log [<options>] [<revision range>] [[\--] <path>…]
 
 ### 用法
 
-#### 查看本地仓库的历史记录
+#### 查看提交记录
 
-##### 查看所有提交记录
-
-如果你想了解本地仓库当前分支的版本历史记录。
-
-```
+```bash
+# 查看所有提交记录
 $ git log
-```
 
-##### 查看指定次数
-
-如果你想了解最近 n 次的提交。`n` 为想查看提交记录的次数。
-
-```
+# 查看指定次数提交记录
 $ git log -n
+
+# 根据ID查看提交记录
+$ git log <commit-id>
+
+# 根据多个ID查看提交记录
+$ git log <commit1_id> <commit2_id>
+
+# 查看最后一次提交记录
+$ git log HEAD
+
+# 查看倒数第二次提交记录
+$ git log HEAD^
+$ git log HEAD~1
 ```
 
 <details>
@@ -51,69 +56,21 @@ $ git log -n
 
 查看最近三次的提交记录
 
-```
+```bash
 $ git log -3
 ```
 
-</details>
-
-##### 根据ID查看提交记录
-
-根据提交ID查询日志
-
-```
-$ git log commit_id
-```
-
-根据多个ID 查看日志。
-
-```
-$ git log commit1_id commit2_id
-```
-
-其中，commit_id可以是提交哈希值的简写模式，也可以使用HEAD代替。HEAD代表最后一次提交，`HEAD^`为最后一个提交的父提交，等同于`HEAD～1`，`HEAD～2`代表倒数第二次提交
-
-```
-# git log HEAD
-```
-
-<details>
-
-<summary>例子</summary>
-
-```
+```bash
 $ git log c5f8a258babf5eec54edc794ff980d8340396592
 ```
 
 </details>
 
-#### 查看指定格式提交日志
+#### 显示本地执行过的git命令
 
-如果你想只看某一个人的提交记录
-
+```bash
+$ git relog
 ```
-$ git log --author=bob
-```
-
-一个压缩后的每一条提交记录只占一行。
-
-```
-$ git log --pretty=oneline
-```
-
-或者你想通过 ASCII 艺术的树形结构来展示所有的分支, 每个分支都标示了他的名字和标签。
-
-```
-$ git log --graph --oneline --decorate --all
-```
-
-看看哪些文件改变了
-
-```
-$ git log --name-status
-```
-
-<br>
 
 [⬆回到顶端](#目录)
 
@@ -139,47 +96,53 @@ git diff [options] [--no-index] [--] <path> <path>
 
 ### 用法
 
-#### 查看工作目录与暂存区差异
+#### 查看工作区与暂存区差异
 
-查看文件在工作目录与暂存区的差别
+查看文件在工作区与暂存区的差别
 
-```
+```bash
 $ git diff <filename>
 ```
 
 如果还没 add 进暂存区，则查看文件自身修改前后的差别。也可查看和另一分支的区别。
 
-```
+```bash
 $ git diff <branch> <filename>
 ```
 
-#### 查暂存区与本地仓库差异
+#### 查暂存区与最近版本的差异
 
 表示查看已经 add 进暂存区但是尚未 commit 的内容同最新一次 commit 时的内容的差异。
 
-```
+```bash
 $ git diff --cached <filename>
 ```
 
 如果你要比较指定仓库版本。
 
-```
+```bash
 $ git diff --cached <commit> <filename>
 ```
 
-#### 查看工作目录与本地仓库版本间差异
+#### 查看工作区与最近版本间差异
 
-查看工作目录同Git仓库指定 commit 的内容的差异。
+查看工作区同Git仓库指定提交版本的差异。
 
-```
+```bash
 $ git diff <commit> <filename>
 ```
 
-#### 查看版本间的差异
+#### 查看提交版本间的差异
 
-```
+```bash
 $ git diff <commit> <commit>
 ```
+#### 查看工作区、暂存区和最近版本间的差异
+
+```bash
+$ git diff HEAD
+```
+
 <br>
 
 [⬆回到顶端](#目录)
