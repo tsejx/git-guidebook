@@ -97,10 +97,6 @@ $ git branch <branch-name> <commit-id>
 $ git branch --track <branch-name> <remote-branch>
 ```
 
-<details>
-
-<summary>例子</summary>
-
 #### 关联远程分支
 
 关联之后，`git branch -vv` 就可以展示关联的远程分支名了，同时推送到远程仓库：`git push` 不要指定远程仓库了。
