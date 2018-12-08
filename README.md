@@ -38,3 +38,4 @@ Git-GuideBook 致力于汇集整理日常工作中比较常用 Git 版本管理�
 - 修补
   - [变基 `rebase`](7_Patching#变基-rebase)
   - [还原 `revert`](7_Patching#还原-revert)
+- [CommitGuideStandard](CommitGuideStandard.md)
