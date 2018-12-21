@@ -1,11 +1,11 @@
-# 设置和配置
+## 设置和配置
 
-## 目录
+**目录：**
 
 - [配置 `config`](#配置-config)
 - [帮助 `help`](#帮助-help)
 
-## 配置 `config`
+### 配置 `config`
 
 > Get and set repository or global options
 >
@@ -15,51 +15,31 @@
 
 一般在新的系统上，我们都需要先配置下自己的 git 工作环境。配置工作只需一次，以后升级时还会沿用现在的配置。当然，如果需要，你随时可以用相同的命令修改已有的配置。
 
-### 语法
+#### 查看所有命令和配置信息
 
-```
-git config [<file-option>] [type] [--show-origin] [-z|--null] name [value [value_regex]]
-git config [<file-option>] [type] --add name value
-git config [<file-option>] [type] --replace-all name value [value_regex]
-git config [<file-option>] [type] [--show-origin] [-z|--null] --get name [value_regex]
-git config [<file-option>] [type] [--show-origin] [-z|--null] --get-all name [value_regex]
-git config [<file-option>] [type] [--show-origin] [-z|--null] [--name-only] --get-regexp name_regex [value_regex]
-git config [<file-option>] [type] [-z|--null] --get-urlmatch name URL
-git config [<file-option>] --unset name [value_regex]
-git config [<file-option>] --unset-all name [value_regex]
-git config [<file-option>] --rename-section old_name new_name
-git config [<file-option>] --remove-section name
-git config [<file-option>] [--show-origin] [-z|--null] [--name-only] -l | --list
-git config [<file-option>] --get-color name [default]
-git config [<file-option>] --get-colorbool name [stdout-is-tty]
-git config [<file-option>] -e | --edit
-```
+配置信息分为：
 
-### 用法
-
-#### 展示所有命令和配置信息
-
-**注意：** 配置信息分为：当前目录（local）和全局（golbal）的配置信息，默认为当前目录的配置信息。
+* 局部（当前目录）配置信息 `--local`（默认值）
+* 全局配置信息 `--global`
 
 ```bash
-$ git config --local --list (当前目录)
-$ git config --global --list (全局)
+# 当前目录
+$ git config --local --list
+
+# 全局
+$ git config --global --list
 ```
 
 #### 配置开发者信息
 
-当安装 git 后你首先要做的事情是设置用户名称和 e-mail 地址。这是非常重要的，因为每次 git 提交都会使用该信息，它被永远的嵌入到了你的提交中。
-
-如果你想在本机其他项目内使用相同的用户信息，可以加上 `--global` 参数，这个设置只需进行一次，后续版本管理无需多次设置。
-
-如果希望在一个特定的项目中使用不同的名称或 `e-mail` 地址，可以在该项目中运行该命令而不要 `--global` 选项。
+当安装 Git 后你首先要做的事情是设置**用户名称**和**电子邮件地址**。这是非常重要的，因为每次 Git 提交都会使用该信息，它被永远的嵌入到了你的提交中。
 
 ```bash
-# 全局配置
+# 全局配置(所有项目)
 $ git config --global user.name <name>
 $ git config --global user.email <email>
 
-# 当前目录配置
+# 当前目录配置(当前项目)
 $ git config user.name <name>
 $ git config user.email <email>
 ```
@@ -80,7 +60,7 @@ $ git config user.email "lammborghini@gmail.com"
 
 #### 添加配置项
 
-如果你想添加当前项目的 git 配置项。默认添加在 local 配置中。
+如果你想添加当前项目的 Git 配置项。默认添加在 `--local` 配置中。
 
 ```bash
 # 当前目录
@@ -130,7 +110,7 @@ $ git config --local -–unset site.name
 
 </details>
 
-#### 给git命令起别名
+#### 简化命令
 
 简化命令。
 
@@ -158,9 +138,9 @@ $ git config --global alias.st status
 $ git config core.fileMode false
 ```
 
-<br>[⬆回到顶端](#目录)
+<br>[⬆回到章节目录](#设置和配置)
 
-## 帮助 `help`
+### 帮助 `help`
 
 > Display help information about Git
 >
@@ -174,4 +154,4 @@ $ git help -g
 
 <br>
 
-[⬆回到顶端](#目录)
+[⬆回到章节目录](#设置和配置)
