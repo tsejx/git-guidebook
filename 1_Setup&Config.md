@@ -138,7 +138,7 @@ $ git config --global alias.st status
 $ git config core.fileMode false
 ```
 
-<br>[⬆回到章节目录](#设置和配置)
+[⬆回到章节目录](#设置和配置)
 
 ### 帮助 `help`
 
@@ -151,7 +151,5 @@ $ git config core.fileMode false
 ```bash
 $ git help -g
 ```
-
-<br>
 
 [⬆回到章节目录](#设置和配置)

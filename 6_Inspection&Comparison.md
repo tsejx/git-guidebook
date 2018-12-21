@@ -1,31 +1,19 @@
-# 检查和比较
+## 检查和比较
 
-## 目录
-
-**目录：检查和比较**
+**目录：**
 
 - [日志 `log`](#日志-log)
 - [差异 `diff`](#差异-diff)
 
-## 日志 `log`
+### 日志 `log`
 
 > Show commit logs
 >
 > 用于显示提交日志信息
 
-### 语法
-
-```
-git log [<options>] [<revision range>] [[\--] <path>…]
-```
-
-### 说明
-
 `git log ` 命令用于显示提交日志信息。
 
 该命令采用适用于 `git rev-list` 命令的选项来控制显示的内容以及如何以及适用于 `git diff- *` 命令的选项，以控制如何更改每个提交引入的内容。
-
-### 用法
 
 #### 查看提交记录
 
@@ -72,29 +60,13 @@ $ git log c5f8a258babf5eec54edc794ff980d8340396592
 $ git relog
 ```
 
-[⬆回到顶端](#目录)
+[⬆回到章节目录](#检查和比较)
 
-## 差异 `diff`
+### 差异 `diff`
 
 > how changes between commits, commit and working tree, etc
 >
 > 用于显示提交和工作树等之间的更改。此命令比较的是工作目录中当前文件和暂存区域快照之间的差异,也就是修改之后还没有暂存起来的变化内容。
-
-### 语法
-
-```
-git diff [options] [<commit>] [--] [<path>…]
-git diff [options] --cached [<commit>] [--] [<path>…]
-git diff [options] <commit> <commit> [--] [<path>…]
-git diff [options] <blob> <blob>
-git diff [options] [--no-index] [--] <path> <path>
-```
-
-### 说明
-
-在工作树和索引或树之间显示更改，索引和树之间的更改，两个树之间的更改，两个blob对象之间的更改或两个文件在磁盘上的更改。
-
-### 用法
 
 #### 查看工作区与暂存区差异
 
@@ -143,6 +115,4 @@ $ git diff <commit> <commit>
 $ git diff HEAD
 ```
 
-<br>
-
-[⬆回到顶端](#目录)
+[⬆回到章节目录](#检查和比较)

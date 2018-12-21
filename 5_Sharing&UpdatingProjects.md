@@ -1,8 +1,6 @@
-# 共享和更新项目
+## 共享和更新项目
 
-## 目录
-
-**目录：共享和更新项目**
+**目录：**
 
 - [提取 `fetch`](#提取-fetch)
 - [拉取 `pull`](#拉取-pull)
@@ -10,24 +8,15 @@
 - [远程 `remote`](#远程-remote)
 - [子模块 `submodule`](#子模块-submodule)
 
-## 提取 `fetch`
+### 提取 `fetch`
 
 > Download objects and refs from another repository 
 >
 > 用于从另一个存储库下载对象和引用
 
-### 语法
+#### 获取远程分支列表
 
-```
-git fetch [<options>] [<repository> [<refspec>…]]
-git fetch [<options>] <group>
-git fetch --multiple [<options>] [(<repository> | <group>)…]
-git fetch --all [<options>]
-```
-
-### 用法
-
-#### 更新远程跟踪分支
+可以用于本地显示的更新远程分支列表。
 
 ```bash
 $ git fetch <remote>
@@ -43,60 +32,39 @@ $ git fetch origin
 
 </details>
 
-#### 将某个远程主机的更新
+#### 获取远程指定分支提交记录
 
-一旦远程主机的版本库有了更新（Git术语叫做commit），需要将这些更新取回本地。
+一旦远程主机的版本库有了更新，需要将这些更新取回本地。
 
 ```bash
 $ git fetch <repository>
 ```
 
-<br>
+[⬆回到章节目录](#共享和更新项目)
 
-[⬆回到顶端](#目录)
-
-## 拉取 `pull`
+### 拉取 `pull`
 
 > Fetch from and integrate with another repository or a local branch
 >
 > 用于从另一个存储库或本地分支获取并集成(整合)。
 
-### 语法
-
-```
-git pull [<options>] [<repository> [<refspec>…]]
-```
-
-### 用法
-
-#### 更新你的本地仓库至最新改动
+#### 获取版本修改记录
 
 ```bash
+# 更新本地仓库至最新改动
 $ git pull
+
+# 当本地分支与远程分支没有共同祖先
+$ git pull --rebase origin master
 ```
 
-<br>
+[⬆回到章节目录](#共享和更新项目)
 
-[⬆回到顶端](#目录)
-
-## 推送 `push`
+### 推送 `push`
 
 > Update remote refs along with associated objects
 >
 > 将本地分支的更新，推送到远程主机。
-
-### 语法
-
-```
-git push [--all | --mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run] [--receive-pack=<git-receive-pack>]
-       [--repo=<repository>] [-f | --force] [-d | --delete] [--prune] [-v | --verbose]
-       [-u | --set-upstream] [--push-option=<string>]
-       [--[no-]signed|--sign=(true|false|if-asked)]
-       [--force-with-lease[=<refname>[:<expect>]]]
-       [--no-verify] [<repository> [<refspec>…]]
-```
-
-### 用法
 
 #### 推送到远程仓库
 
@@ -158,66 +126,29 @@ $ git push origin :<tag-name>
 $ git push origin HEAD
 ```
 
-<br>
+[⬆回到章节目录](#共享和更新项目)
 
-[⬆回到顶端](#目录)
-
-## 远程 `remote`
+### 远程 `remote`
 
 > Manage set of tracked repositories
 >
 > 管理一组跟踪的存储库。
 
-### 语法
-
-```
-git remote [-v | --verbose]
-git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
-git remote rename <old> <new>
-git remote remove <name>
-git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
-git remote set-branches [--add] <name> <branch>…
-git remote get-url [--push] [--all] <name>
-git remote set-url [--push] <name> <newurl> [<oldurl>]
-git remote set-url --add [--push] <name> <newurl>
-git remote set-url --delete [--push] <name> <url>
-git remote [-v | --verbose] show [-n] <name>…
-git remote prune [-n | --dry-run] <name>…
-git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…]
-```
-
-### 用法
-
-#### 查看远程分支
-
-`-v` 即 `--verbose` 表现显示对应的克隆地址。
-
 ```bash
+# 查看远程分支
 $ git remote
 
-# 列出详细信息
+# 列出远程分支的详细信息
 $ git remote -v
 
 # 查看指定远程仓库信息
 $ git remote show <remote>
-```
 
-#### 添加远程仓库
+# 添加新的远程仓库
+$ git remote add orgin <shortname> <url>
 
-增加一个新的远程仓库，并命名
-
-```bash
-$ git remote add origin <shortname> <url>
-```
-
-#### 获取远程仓库变化
-
-如果你想获得远程仓库的变化，并与本地分支合并。
-
-```bash
+# 获取远程仓库变化
 $ git pull <remote> <branch>
 ```
 
-<br>
-
-[⬆回到顶端](#目录)
+[⬆回到章节目录](#共享和更新项目)

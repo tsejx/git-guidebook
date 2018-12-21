@@ -1,52 +1,29 @@
-# 分支与合并
+## 分支与合并
 
-## 目录
-
-**目录：分支与合并**
+**目录：**
 
 - [分支 `branch`](#分支-branch)
 - [查看 `checkout`](#查看-checkout)
 - [合并 `merge`](#合并-merge)
 - [储藏 `stash`](#储藏-stash)
 - [标签 `tag`](#标签-tag)
-- worktree
 
-## 分支 `branch`
+### 分支 `branch`
 
 > List, create, or delete branches
 >
 > 列出, 创建, 或者删除分支
 
-### 语法
-
-```
-git stash list [<options>]
-git stash show [<stash>]
-git stash drop [-q|--quiet] [<stash>]
-git stash ( pop | apply ) [--index] [-q|--quiet] [<stash>]
-git stash branch <branchname> [<stash>]
-git stash save [-p|--patch] [-k|--[no-]keep-index] [-q|--quiet]
-         [-u|--include-untracked] [-a|--all] [<message>]
-git stash [push [-p|--patch] [-k|--[no-]keep-index] [-q|--quiet]
-         [-u|--include-untracked] [-a|--all] [-m|--message <message>]]
-         [--] [<pathspec>…]]
-git stash clear
-git stash create [<message>]
-git stash store [-m|--message <message>] [-q|--quiet] <commit>
-```
-
-### 用法
-
 #### 查看分支
 
 ```bash
-# 查看所有分支
+# 查看本地所有分支
 $ git branch
 
-# 查看远程分支 -r相当于remote
+# 查看远程所有分支 -r相当于remote
 $ git branch -r
 
-# 查看本地分支和远程分支 -a相当于all
+# 查看本地分和远程所有分支 -a相当于all
 $ git branch -a
 
 # 查看本地分支关联远程分支的情况
@@ -64,7 +41,7 @@ $ git branch
 * release/1.0.0
 ```
 
-上面显示结果中，当前有两个分支：**master** 和 **release/1.0.0**，当前在 **release/1.0.0** 分支上，它前面有个星号(`*`)。
+上面显示结果中，当前有两个分支：`master` 和 `release/1.0.0`，当前在 `release/1.0.0` 分支上，它前面有个星号 `*`。
 
 ```bash
 # 远程分支
@@ -78,6 +55,21 @@ $ git branch -a
 ```
 
 </details>
+
+#### 关联远程分支
+
+关联之后，`git branch -vv` 就可以展示关联的远程分支名了，同时推送到远程仓库。
+
+```bash
+$ git branch -u <branch-name>
+```
+
+或者在 `git push` 时加上参数 `-u` 参数。
+
+```bash
+$ git push -u origin/<branch-name>
+$ git push --set-upstream origin/<branch-name>
+```
 
 #### 新建分支
 
@@ -95,20 +87,6 @@ $ git branch <branch-name> <commit-id>
 
 # 新建一个分支，与指定的远程分支建立追踪关系
 $ git branch --track <branch-name> <remote-branch>
-```
-
-#### 关联远程分支
-
-关联之后，`git branch -vv` 就可以展示关联的远程分支名了，同时推送到远程仓库：`git push` 不要指定远程仓库了。
-
-```bash
-$ git branch -u <branch-name>
-```
-
-或者在 `git push` 时加上参数 `-u` 参数。
-
-```bash
-$ git push origin/<branch-name>
 ```
 
 #### 切换分支
@@ -135,6 +113,7 @@ $ git checkout dev/1.0.0
 
 ```bash
 $ git branch -m <branch-name>
+$ git branch --move <branch-name>
 ```
 
 <details>
@@ -147,12 +126,15 @@ $ git branch -m dev/1.0.0 develop/1.0.0
 
 </details>
 
-#### 删除本地分支
+#### 删除分支
 
-通过如下命令可以删除指定本地分支。`<local-branch-name>` 为本地分支名称。
+**删除本地分支**
+
+`<local-branch-name>` 为本地分支名称。
 
 ```bash
 $ git branch -d <local-branch-name>
+$ git branch --delete <local-branch-name>
 ```
 
 <details>
@@ -162,14 +144,12 @@ $ git branch -d <local-branch-name>
 删除一个名称为 **dev/1.0.0** 的远程分支
 
 ```bash
-$ git push origin --delete dev/1.0.0
+$ git push origin -d dev/1.0.0
 ```
 
 </details>
 
-#### 删除远程分支
-
-通过如下命令可以删除指定的远程分支。
+**删除远程分支**
 
 ```bash
 $ git push origin --delete <branch-name>
@@ -191,33 +171,18 @@ $ git push origin --delete dev/1.0.0
 #### 重命名本地分支
 
 ```bash
-$ git -m <new-branch-name>
+$ git branch -m <old-branch-name> <new-branch-name>
 ```
 
-<br>
+[⬆回到章节目录](#分支与合并)
 
-[⬆回到顶端](#目录)
-
-## 查看 `checkout`
+### 查看 `checkout`
 
 > Switch branches or restore working tree files
 >
 > 切换分支或恢复工作树文件。
 
-### 语法
-
-```
-git checkout [-q] [-f] [-m] [<branch>]
-git checkout [-q] [-f] [-m] --detach [<branch>]
-git checkout [-q] [-f] [-m] [--detach] <commit>
-git checkout [-q] [-f] [-m] [[-b|-B|--orphan] <new_branch>] [<start_point>]
-git checkout [-f|--ours|--theirs|-m|--conflict=<style>] [<tree-ish>] [--] <paths>…
-git checkout [-p|--patch] [<tree-ish>] [--] [<paths>…]
-```
-
-### 用法
-
-#### 撤销/恢复文件
+#### 撤销文件修改
 
 ```bash
 # 放弃工作区所有文件的修改
@@ -242,21 +207,11 @@ $ git checkout -
 
 #### 切换标签
 
-一般上线之前都会打tag，就是为了防止上线后出现问题，方便快速回退到上一版本。下面的命令是回到某一标签下的状态。
+一般上线之前都会打 `tag`，就是为了防止上线后出现问题，方便快速回退到上一版本。下面的命令是回到某一标签下的状态。
 
 ```bash
-$ git checkout -b branch_name tag_name
+$ git checkout -b <branch_name> <tag_name>
 ```
-
-#### 替换本地改动
-
-假如你操作失误，你可以使用如下命令替换本地改动
-
-```bash
-$ git checkout -- <filename>
-```
-
-此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到暂存区的改动以及新文件都不会受到影响。
 
 #### 创建分支并切换分支
 
@@ -298,28 +253,13 @@ $ git rev-list -n 1 HEAD -- <file_path>
 $ git checkout <deleting_commit>^ -- <file_path> 
 ```
 
-<br>
+[⬆回到章节目录](#分支与合并)
 
-[⬆回到顶端](#目录)
-
-## 合并 `merge`
+### 合并 `merge`
 
 > Join two or more development histories together
 >
 > 用于将两个或两个以上的开发历史加入(合并)一起。
-
-### 语法
-
-```
-git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]
-    [-s <strategy>] [-X <strategy-option>] [-S[<keyid>]]
-    [--[no-]allow-unrelated-histories]
-    [--[no-]rerere-autoupdate] [-m <msg>] [<commit>…]
-git merge --abort
-git merge --continue
-```
-
-### 用法
 
 #### 合并分支
 
@@ -331,47 +271,27 @@ git merge --continue
 $ git merge <branch1> <branch2> ...
 ```
 
-<br>
+[⬆回到章节目录](#分支与合并)
 
-[⬆回到顶端](#目录)
-
-## 储藏 `stash`
+### 储藏 `stash`
 
 > Stash the changes in a dirty working directory away
 >
 > 将更改储藏在脏工作目录中
-
-### 语法
-
-```
-git stash list [<options>]
-git stash show [<stash>]
-git stash drop [-q|--quiet] [<stash>]
-git stash ( pop | apply ) [--index] [-q|--quiet] [<stash>]
-git stash branch <branchname> [<stash>]
-git stash [push [-p|--patch] [-k|--[no-]keep-index] [-q|--quiet]
-	     [-u|--include-untracked] [-a|--all] [-m|--message <message>]
-	     [--] [<pathspec>…]]
-git stash clear
-git stash create [<message>]
-git stash store [-m|--message <message>] [-q|--quiet] <commit>
-```
-
-### 用法
 
 #### 储藏文件修改
 
 储藏文件修改，但是不用提交到版本库。
 
 ```bash
-# 将所有文件修改储藏
+# 将所有文件修改添加至暂时储藏库
 $ git stash
 
-# 储藏包括未跟踪（untracked）的文件
+# 暂时储藏库包括未跟踪（untracked）的文件
 $ git stash -u
 ```
 
-#### 查看所有储藏记录
+#### 查看储藏记录
 
 ```bash
 $ git stash list
@@ -409,7 +329,7 @@ $ git stash pop
 
 你可以运行 `git stash drop` 加上你希望移除的储藏的名称来移除储藏。
 
-```
+```bash
 $ git stash drop <stash@{n}>
 ```
 
@@ -429,30 +349,13 @@ $ git stash drop stash@{0}
 $ git stash clear
 ```
 
-<br>
+[⬆回到章节目录](#分支与合并)
 
-[⬆回到顶端](#目录)
-
-## 标签 `tag`
+### 标签 `tag`
 
 > Create, list, delete or verify a tag object signed with GPG
 >
 > 用于创建，列出，删除或验证使用GPG签名的标签对象
-
-### 语法
-
-```
-git tag [-a | -s | -u <keyid>] [-f] [-m <msg> | -F <file>]
-    <tagname> [<commit> | <object>]
-git tag -d <tagname>…
-git tag [-n[<num>]] -l [--contains <commit>] [--no-contains <commit>]
-    [--points-at <object>] [--column[=<options>] | --no-column]
-    [--create-reflog] [--sort=<key>] [--format=<format>]
-    [--[no-]merged [<commit>]] [<pattern>…]
-git tag -v [--format=<format>] <tagname>…
-```
-
-### 用法
 
 #### 查看标签
 
@@ -502,6 +405,4 @@ $ git tag -d <tag-name>
 $ git push origin :refs/tags/<tag-name>
  ```
 
-<br>
-
-[⬆回到顶端](#目录)
+[⬆回到章节目录](#分支与合并)
