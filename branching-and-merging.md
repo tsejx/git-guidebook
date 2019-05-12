@@ -1,20 +1,14 @@
-## 分支与合并
+# 分支与合并
 
-**目录：**
-
-- [分支 `branch`](#分支-branch)
-- [查看 `checkout`](#查看-checkout)
-- [合并 `merge`](#合并-merge)
-- [储藏 `stash`](#储藏-stash)
-- [标签 `tag`](#标签-tag)
-
-### 分支 `branch`
+## 分支 git branch
 
 > List, create, or delete branches
 >
 > 列出, 创建, 或者删除分支
 
-#### 查看分支
+### 查看分支
+
+📖 **语法：**
 
 ```bash
 # 查看本地所有分支
@@ -30,20 +24,14 @@ $ git branch -a
 $ git branch -vv
 ```
 
-<details>
-
-<summary>示例</summary>
+📍 **示例：**
 
 ```bash
 # 本地分支
 $ git branch
   master
 * release/1.0.0
-```
 
-上面显示结果中，当前有两个分支：`master` 和 `release/1.0.0`，当前在 `release/1.0.0` 分支上，它前面有个星号 `*`。
-
-```bash
 # 远程分支
 $ git branch -a
 * dev/1.0.0
@@ -54,11 +42,13 @@ $ git branch -a
   remotes/origin/release/1.0.0
 ```
 
-</details>
+上面查看本地分支的显示结果中，当前有两个分支：`master` 和 `release/1.0.0`，当前处于在 `release/1.0.0` 分支上，它前面有个星号 `*`。
 
-#### 关联远程分支
+### 关联远程分支
 
 关联之后，`git branch -vv` 就可以展示关联的远程分支名了，同时推送到远程仓库。
+
+📖 **语法：**
 
 ```bash
 $ git branch -u <branch-name>
@@ -66,123 +56,122 @@ $ git branch -u <branch-name>
 
 或者在 `git push` 时加上参数 `-u` 参数。
 
+📖 **语法：**
+
 ```bash
 $ git push -u origin/<branch-name>
 $ git push --set-upstream origin/<branch-name>
 ```
 
-#### 新建分支
+### 新建分支
 
-新建一个分支，但依然停留在当前分支。`<branch-name>` 为新建分支名称。
+新建一个分支，但依然**停留在当前分支**。`<branch-name>` 为新建分支名称。
+
+📖 **语法：**
 
 ```bash
-# 新建分支但并不切换分支
+# 基于当前分支末梢新建分支但并不切换分支
 $ git branch <branch-name>
 
-# 新建分支并切换到该本地分支
+# 基于当前分支末梢新建分支并切换至该分支
 $ git checkout -b <branch-name>
 
-# 新建一个分支，指向指定提交
+# 基于某次提交、分支或标签创建新分支
 $ git branch <branch-name> <commit-id>
 
 # 新建一个分支，与指定的远程分支建立追踪关系
 $ git branch --track <branch-name> <remote-branch>
 ```
 
-#### 切换分支
+### 切出分支
 
-切换到指定分支。`<branch-name>` 为切换到的分支。
+切换到指定分支。`<branch-name>` 为切换到的目标分支。
+
+📖 **语法：**
 
 ```bash
 $ git checkout <branch-name>
 ```
 
-<details>
-
-<summary>示例</summary>
+📍 **示例：** 切换至 dev/1.0.0 分支上
 
 ```bash
 $ git checkout dev/1.0.0
 ```
 
-</details>
-
-#### 修改分支
+### 修改分支
 
 修改指定分支名称。`<branch-name>` 为指定分支新名称。`-m` 即 `--move` 表示移动或重命名和相应的引用日志。
+
+📖 **语法：**
 
 ```bash
 $ git branch -m <branch-name>
 $ git branch --move <branch-name>
 ```
 
-<details>
 
-<summary>例子</summary>
+📍 **示例：** 重命名 `dev/1.0.0` 分支为 `develop/1.0.0`
 
 ```bash
 $ git branch -m dev/1.0.0 develop/1.0.0
 ```
 
-</details>
+### 删除分支
 
-#### 删除分支
-
-**删除本地分支**
+#### 删除本地分支
 
 `<local-branch-name>` 为本地分支名称。
+
+📖 **语法：**
 
 ```bash
 $ git branch -d <local-branch-name>
 $ git branch --delete <local-branch-name>
 ```
 
-<details>
+删除一个名称为 **dev/1.0.0** 的远程分支。
 
-<summary>例子</summary>
-
-删除一个名称为 **dev/1.0.0** 的远程分支
+📍 **示例：**
 
 ```bash
 $ git push origin -d dev/1.0.0
 ```
 
-</details>
+#### 删除远程分支
 
-**删除远程分支**
+📖 **语法：**
 
 ```bash
 $ git push origin --delete <branch-name>
 $ git branch -dr [remote/branch]
 ```
 
-<details>
+删除一个名称为 `dev/1.0.0` 的远程分支。
 
-<summary>例子</summary>
-
-删除一个名称为 **dev/1.0.0** 的远程分支
+📍 **示例：**
 
 ```bash
 $ git push origin --delete dev/1.0.0
 ```
 
-</details>
+### 重命名本地分支
 
-#### 重命名本地分支
+📖 **语法：**
 
 ```bash
 $ git branch -m <old-branch-name> <new-branch-name>
 ```
 
-[⬆回到章节目录](#分支与合并)
-
-### 查看 `checkout`
+## 查看 git checkout
 
 > Switch branches or restore working tree files
 >
 > 切换分支或恢复工作树文件。
 
-#### 撤销文件修改
+### 撤销文件修改
+
+📖 **语法：**
 
 ```bash
 # 放弃工作区所有文件的修改
@@ -195,7 +184,9 @@ $ git checkout <file>
 $ git checkout <commit> <file>
 ```
 
-#### 切换分支
+### 切换分支
+
+📖 **语法：**
 
 ```bash
 # 切换到指定分支
@@ -205,17 +196,21 @@ $ git checkout <branch-name>
 $ git checkout -
 ```
 
-#### 切换标签
+### 切换标签
 
 一般上线之前都会打 `tag`，就是为了防止上线后出现问题，方便快速回退到上一版本。下面的命令是回到某一标签下的状态。
+
+📖 **语法：**
 
 ```bash
 $ git checkout -b <branch_name> <tag_name>
 ```
 
-#### 创建分支并切换分支
+### 创建分支并切换分支
 
 通过如下命令可以创建一个自定义命名的分支，并切换到该分支上。`<branch-name>` 为分支命名。
+
+📖 **语法：**
 
 ```bash
 # 切换的分支保留提交记录日志
@@ -225,63 +220,63 @@ $ git checkout -b <branch-name>
 $ git checkout --orphan <branch-name>
 ```
 
-<details>
+创建一个命名为 `feature_x` 的分支，并切换到该分支上。
 
-<summary>例子</summary>
-
-创建一个命名为 feature_x 的分支，并切换到该分支上。
+📍 **示例：**
 
 ```bash
 $ git checkout -b feature_x
 ```
 
-</details>
+### 从储藏库中拿出指定提交
 
-#### 从储藏库中拿出指定提交
+📖 **语法：**
 
 ```bash
 $ git checkout <stash@{n}> -- <file-name>
 ```
 
-#### 恢复删除的文件
+### 恢复删除的文件
+
+📖 **语法：**
 
 ```bash
 # 得到 deleting_commit
-$ git rev-list -n 1 HEAD -- <file_path> 
+$ git rev-list -n 1 HEAD -- <file_path>
 
 # 回到删除文件 deleting_commit 之前的状态
-$ git checkout <deleting_commit>^ -- <file_path> 
+$ git checkout <deleting_commit>^ -- <file_path>
 ```
 
-[⬆回到章节目录](#分支与合并)
-
-### 合并 `merge`
+## 合并 git merge
 
 > Join two or more development histories together
 >
 > 用于将两个或两个以上的开发历史加入(合并)一起。
 
-#### 合并分支
+### 合并分支
 
 以在你的工作目录中*获取（fetch）* 并 *合并（merge）*远端的改动。
 
 如果你要合并指定分支到当前分支。`branch` 为需要合并到当前分支的名称。
 
+📖 **语法：**
+
 ```bash
 $ git merge <branch1> <branch2> ...
 ```
 
-[⬆回到章节目录](#分支与合并)
-
-### 储藏 `stash`
+## 储藏 git stash
 
 > Stash the changes in a dirty working directory away
 >
 > 将更改储藏在脏工作目录中
 
-#### 储藏文件修改
+### 储藏文件修改
 
 储藏文件修改，但是不用提交到版本库。
+
+📖 **语法：**
 
 ```bash
 # 将所有文件修改添加至暂时储藏库
@@ -291,15 +286,19 @@ $ git stash
 $ git stash -u
 ```
 
-#### 查看储藏记录
+### 查看储藏记录
+
+📖 **语法：**
 
 ```bash
 $ git stash list
 ```
 
-#### 重回指定储藏版本
+### 重回指定储藏版本
 
 重新应用你刚刚实施的储藏（但是储藏的内容仍然在栈上）。
+
+📖 **语法：**
 
 ```bash
 $ git stash apply <stash@{n}>
@@ -307,57 +306,55 @@ $ git stash apply <stash@{n}>
 
 也可以应用更早的储藏，你需要通过名称指定它。如果你不指明，Git 默认使用最近的储藏并尝试使用它。
 
-<details>
-
-<summary>示例</summary>
+📍 **示例：**
 
 ```bash
 $ git stash apply stash@{2}
 ```
 
-</details>
-
-#### 重回最后储藏版本
+### 重回最后储藏版本
 
 重回最后一个储藏的版本，并删除这个储藏版本库中的版本。
+
+📖 **语法：**
 
 ```bash
 $ git stash pop
 ```
 
-#### 移除储藏
+### 移除储藏
 
 你可以运行 `git stash drop` 加上你希望移除的储藏的名称来移除储藏。
+
+📖 **语法：**
 
 ```bash
 $ git stash drop <stash@{n}>
 ```
 
-<details>
-
-<summary>示例</summary>
+📍 **示例：**
 
 ```bash
 $ git stash drop stash@{0}
 ```
 
-</details>
+### 清空储藏
 
-#### 清空储藏
+📖 **语法：**
 
 ```bash
 $ git stash clear
 ```
 
-[⬆回到章节目录](#分支与合并)
-
-### 标签 `tag`
+## 标签 git tag
 
 > Create, list, delete or verify a tag object signed with GPG
 >
-> 用于创建，列出，删除或验证使用GPG签名的标签对象
+> 用于创建，列出，删除或验证使用 GPG 签名的标签对象
 
-#### 查看标签
+### 查看标签
+
+📖 **语法：**
 
 ```bash
 # 查看所有标签
@@ -370,9 +367,11 @@ $ git show <tag-name>
 $ git describe --tags --abbrev=0
 ```
 
-#### 推送标签
+### 推送标签
 
-首先要保证本地创建好了标签才可以推送标签到远程仓库
+首先要保证本地创建好了标签才可以推送标签到远程仓库。
+
+📖 **语法：**
 
 ```bash
 # 提交指定标签
@@ -382,7 +381,11 @@ $ git push <remote> <tag-name>
 $ git push <remote> --tags
 ```
 
-#### 新建标签
+### 新建标签
+
+> ⚠️ 注意标签无法重命名，需谨慎操作
+
+📖 **语法：**
 
 ```bash
 # 在当前提交新建标签（默认打在最近一次提交记录上）
@@ -395,7 +398,9 @@ $ git tag <tag-name> <commit-id>
 $ git checkout -b <branch-name> <tag-name>
 ```
 
-#### 删除标签
+### 删除标签
+
+📖 **语法：**
 
  ```bash
 # 删除本地标签
@@ -404,5 +409,3 @@ $ git tag -d <tag-name>
 # 删除远程标签
 $ git push origin :refs/tags/<tag-name>
  ```
-
-[⬆回到章节目录](#分支与合并)
